@@ -1,6 +1,10 @@
 # tanks_of_freedom_docker_server
 Tanks of Freedom Server, running in Docker.
 
+## About Tanks of Freedom Server
+https://github.com/P1X-in/tanks-of-freedom-server#readme
+
+
 ## Build the Docker Image
 
 ```
