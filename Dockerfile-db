@@ -1,0 +1,11 @@
+FROM mysql:5.7
+LABEL maintainer="Bobby Hines <bobbyahines@gmail.com>"
+LABEL image="tof/mysql:5.7"
+
+# Add a database
+ENV MYSQL_DATABASE tof
+ENV MYSQL_USER user
+ENV MYSQL_PASSWORD pass
+ENV MYSQL_HOST db
+
+COPY ./sql /docker-entrypoint-initdb.d/
