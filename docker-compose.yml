@@ -1,0 +1,41 @@
+version: '3.7'
+services:
+
+  tof_server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: bobbyahines/tof:latest
+    container_name: tof_server
+    restart: unless-stopped
+    networks:
+      - frontend
+      - backend
+    ports:
+      - "5000:5000"
+#    volumes:
+#    - ./:/srv
+    links:
+      - tof_db
+    entrypoint: python3
+    command: run.py
+
+  tof_db:
+    image: library/mysql:5.7
+    container_name: tof_db
+    restart: unless-stopped
+    networks:
+      - backend
+    expose:
+      - "3306"
+#    volumes:
+#      - ./db:/var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=tof
+      - MYSQL_RANDOM_ROOT_PASSWORD=yes
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=pass
+
+networks:
+  frontend:
+  backend:
