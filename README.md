@@ -43,6 +43,8 @@ from here, and the database pre-flight will auto-build. To engage the auto-build
 $ docker-compose up -d --build
 ```
 
+Otherwise...
+
 #### Table Migrations
 The required tables to bootstrap the database are included in ToF's server repo in the `./sql` folder. The `Dockerfile-db` file adds
 the SQL transactions into the init directory of the database, so the needed tables are created upon launch.
