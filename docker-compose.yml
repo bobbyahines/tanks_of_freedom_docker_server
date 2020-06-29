@@ -13,29 +13,27 @@ services:
       - backend
     ports:
       - "5000:5000"
-#    volumes:
-#    - ./:/srv
     links:
-      - tof_db
+        - tof_db:db
     entrypoint: python3
     command: run.py
 
   tof_db:
-    image: library/mysql:5.7
+    build:
+      context: .
+      dockerfile: Dockerfile-db
+    image: tof/mysql:5.7
     container_name: tof_db
     restart: unless-stopped
     networks:
       - backend
     expose:
       - "3306"
-#    volumes:
-#      - ./db:/var/lib/mysql
     environment:
-      - MYSQL_DATABASE=tof
       - MYSQL_RANDOM_ROOT_PASSWORD=yes
+      - MYSQL_DATABASE=tof
       - MYSQL_USER=user
       - MYSQL_PASSWORD=pass
-
-networks:
-  frontend:
-  backend:
+# If you'd like to persist the data between restarts, you can uncomment the volumes lines.
+#    volumes:
+#      - ./db:/var/lib/mysql
