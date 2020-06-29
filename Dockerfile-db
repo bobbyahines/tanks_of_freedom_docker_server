@@ -8,4 +8,9 @@ ENV MYSQL_USER user
 ENV MYSQL_PASSWORD pass
 ENV MYSQL_HOST db
 
-COPY ./sql /docker-entrypoint-initdb.d/
+RUN apt-get update -y && apt-get install git nano -y
+
+#Clone in the server source code, and move it to the srv dir.
+RUN git clone https://github.com/P1X-in/tanks-of-freedom-server.git
+RUN cp ./tanks-of-freedom-server/sql/*.sql /docker-entrypoint-initdb.d/
+RUN rm -Rf ./tanks-of-freedom-server/
