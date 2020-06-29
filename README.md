@@ -6,16 +6,26 @@ https://github.com/P1X-in/tanks-of-freedom-server#readme
 
 # Getting Started
 
-## TOF Server Stack is Code + DB
+## The Easy Way
+
+From within this directory:
+
+```bash
+$ docker-compose up -d --build
+```
+
+## The Manual Way
+
+### TOF Server Stack is Code + DB
 
 TOF server requires both its code and a mysql/mariadb database where it persists application data.
 
 Respecting Docker's single process per container principle, the application and the database are run in separate containers.
 As a result, they must be configured to "speak" to each other.
 
-### Pre-Flight Configurations: THE SERVER
+#### Pre-Flight Configurations: THE SERVER
 
-#### config.py
+##### config.py
 This file contains configurable sections for maps, and the database:  
 ```bash
 # database configuration
@@ -36,16 +46,8 @@ $ docker build -f $PWD/Dockerfile -t tof/server:latest .
 ```
 
 ### Pre-Flight Configurations: THE DATABASE
-You can go through this process of building the database independently of the stack, or you can just run the compose file
-from here, and the database pre-flight will auto-build. To engage the auto-build now, run:  
 
-```bash
-$ docker-compose up -d --build
-```
-
-Otherwise...
-
-#### Table Migrations
+##### Table Migrations
 The required tables to bootstrap the database are included in ToF's server repo in the `./sql` folder. The `Dockerfile-db` file adds
 the SQL transactions into the init directory of the database, so the needed tables are created upon launch.
 
@@ -55,14 +57,8 @@ the SQL transactions into the init directory of the database, so the needed tabl
 $ docker build -f $PWD/Dockerfile-db -t tof/mysql:5.7
 ```
 
-## Run the Docker Stack
+#### Run the Docker Stack
 
 ```
 $ docker-compose up -d
-```
-
-To rebuild the docker images, run:
-
-```bash
-$ docker-compose up -d --build
 ```
