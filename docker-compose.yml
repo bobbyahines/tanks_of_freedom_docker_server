@@ -34,6 +34,11 @@ services:
       - MYSQL_DATABASE=tof
       - MYSQL_USER=user
       - MYSQL_PASSWORD=pass
+
+networks:
+  frontend:
+  backend:
+
 # If you'd like to persist the data between restarts, you can uncomment the volumes lines.
 #    volumes:
 #      - ./db:/var/lib/mysql
